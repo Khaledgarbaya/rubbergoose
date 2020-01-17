@@ -7,3 +7,11 @@
 body {
   @apply bg-purple-100;
 }
+
+.btn {
+  @apply flex-shrink-0 bg-purple-500 border-purple-500  text-sm border-4 text-white py-1 px-4 rounded;
+}
+
+.btn:hover {
+  @apply bg-purple-700 border-purple-700;
+}
