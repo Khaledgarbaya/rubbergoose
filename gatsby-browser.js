@@ -1,7 +1,10 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+const React = require("react")
+const netlifyIdentity = require("netlify-identity-widget")
 
-// You can delete this file if you're not using it
+window.netlifyIdentity = netlifyIdentity
+// You must run this once before trying to interact with the widget
+netlifyIdentity.init()
+
+exports.wrapRootElement = ({ element }) => {
+  return <>{element}</>
+}
