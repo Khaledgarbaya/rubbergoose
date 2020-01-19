@@ -1,10 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { Link } from "gatsby"
 import "../styles/tailwind.css"
+import FavIcons from "../components/favicons"
 const Layout = ({ children }) => {
   return (
     <>
+      <FavIcons />
       <div>
         <header className="container mx-auto p-8 flex justify-between">
           <div className="w-48">

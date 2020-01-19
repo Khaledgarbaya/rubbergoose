@@ -48,6 +48,5 @@ export const getCurrentUser = () => {
 }
 
 export const updateUserInfo = async user_metadata => {
-  console.log(user_metadata)
   await netlifyIdentity.gotrue.currentUser().update({ data: user_metadata })
 }

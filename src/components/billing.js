@@ -1,21 +1,14 @@
 import React from "react"
-import { Link } from "gatsby"
+import DashboardNav from "./dashbaord-nav"
 const Billing = () => (
   <div className="container mx-auto max-w-md">
-    <nav className="mb-4">
-      <Link className="p-1" to="user/dashboard">
-        Settings
-      </Link>
-      <Link className="p-1 ml-2 border-b border-purple-700" to="user/billing">
-        Billing
-      </Link>
-    </nav>
+    <DashboardNav />
     <form className="w-full max-w-lg shadow rounded-lg p-8 bg-white">
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-first-name"
+            htmlFor="grid-first-name"
           >
             First Name
           </label>
@@ -30,7 +23,7 @@ const Billing = () => (
         <div className="w-full md:w-1/2 px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-last-name"
+            htmlFor="grid-last-name"
           >
             Last Name
           </label>
@@ -46,7 +39,7 @@ const Billing = () => (
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-password"
+            htmlFor="grid-password"
           >
             Credit Card
           </label>
@@ -61,7 +54,7 @@ const Billing = () => (
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-first-name"
+              htmlFor="grid-first-name"
             >
               CVV
             </label>
@@ -76,7 +69,7 @@ const Billing = () => (
           <div className="w-full md:w-1/2 px-3">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-last-name"
+              htmlFor="grid-last-name"
             >
               Expire date
             </label>
