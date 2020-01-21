@@ -5,20 +5,6 @@ import CheckoutForm from "../components/stripe/checkout-form"
 import { graphql, useStaticQuery } from "gatsby"
 import SubscriptionCheckout from "../components/stripe/subscription-checkout"
 const Billing = () => {
-  const data = useStaticQuery(
-    graphql`
-      {
-        allStripeProduct {
-          nodes {
-            id
-            name
-            object
-            type
-          }
-        }
-      }
-    `
-  )
   return (
     <div className="container mx-auto max-w-md">
       <DashboardNav />
