@@ -28,6 +28,7 @@
     "stripe": "^8.4.0"
   },
   "devDependencies": {
+    "netlify-lambda": "^1.6.3",
     "prettier": "^1.19.1",
     "tailwindcss": "^1.1.4"
   },
