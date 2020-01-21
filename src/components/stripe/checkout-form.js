@@ -19,7 +19,7 @@ class CheckoutForm extends React.Component {
       .then(function(result) {
         console.log(result.paymentMethod.id)
         axios
-          .post("lambda_url", {
+          .post("https://rubbergoose.dev/.netlify/functions/create-customer", {
             email: "jenny.rosen@example.com",
             payment_method: result.paymentMethod.id,
           })
