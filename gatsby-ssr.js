@@ -1,7 +1,11 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
- */
-
-// You can delete this file if you're not using it
+const React = require("react")
+module.exports.onRenderBody = ({ setPostBodyComponents }) => {
+  return setPostBodyComponents([
+    <script
+      id="stripe-js"
+      key="gatsby-plugin-stripe"
+      src="https://js.stripe.com/v3/"
+      async={true}
+    />,
+  ])
+}
