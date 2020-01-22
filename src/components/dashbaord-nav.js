@@ -7,14 +7,14 @@ const DashboardNav = () => (
       <Link
         activeClassName="border-b border-purple-700"
         className="p-1"
-        to="user/dashboard"
+        to="/user/dashboard"
       >
         Settings
       </Link>
       <Link
         activeClassName="border-b border-purple-700"
         className="p-1 ml-2"
-        to="user/billing"
+        to="/user/billing"
       >
         Billing
       </Link>

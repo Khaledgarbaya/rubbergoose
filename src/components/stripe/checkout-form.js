@@ -3,7 +3,16 @@ import React from "react"
 import { injectStripe } from "react-stripe-elements"
 import CardSection from "./card-section"
 import axios from "axios"
+import { getCurrentUser } from "../../services/auth"
 class CheckoutForm extends React.Component {
+  constructor() {
+    super()
+    console.log(getCurrentUser())
+    this.state = { plan: "plan_Gb26BxaCDanonu" }
+  }
+  handlePlanSelection = ev => {
+    this.setState({ plan: ev.target.value })
+  }
   handleSubmit = ev => {
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault()
@@ -13,25 +22,46 @@ class CheckoutForm extends React.Component {
         type: "card",
         card: cardElement,
         billing_details: {
-          email: "jenny.rosen@example.com",
+          email: getCurrentUser().email,
         },
       })
       .then(function(result) {
-        console.log(result.paymentMethod.id)
         axios
           .post("https://rubbergoose.dev/.netlify/functions/create-customer", {
-            email: "jenny.rosen@example.com",
+            email: getCurrentUser().email,
             payment_method: result.paymentMethod.id,
+            plan: this.state.plan,
           })
           .then(customer => console.log(customer))
       })
   }
 
   render() {
+    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <CardSection />
-        <button class="btn mt-4">Confirm order</button>
+        <div className="mt-6">
+          {[
+            { id: "plan_Gb26BxaCDanonu", name: "Basic" },
+            { id: "plan_Gb26Y1FdKtO1YA", name: "Pro" },
+            { id: "plan_Gb27iIYq4Xq6VN", name: "Pro Plus" },
+          ].map(plan => {
+            return (
+              <label key={plan.id} className="p-4">
+                {plan.name}{" "}
+                <input
+                  onSelect={this.handlePlanSelection}
+                  defaultChecked={this.state.plan === plan.id}
+                  name="plan"
+                  type="radio"
+                  value={plan.id}
+                />
+              </label>
+            )
+          })}
+        </div>
+        <button className="btn mt-4 block">Subscribe</button>
       </form>
     )
   }

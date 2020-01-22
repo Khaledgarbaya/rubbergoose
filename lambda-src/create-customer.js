@@ -36,13 +36,14 @@ exports.handler = async function(event, context, callback) {
   const customer = await stripe.customers.create({
     payment_method: data.payment_method,
     email: data.email,
+    plan: data.plan,
     invoice_settings: {
       default_payment_method: data.payment_method,
     },
   })
   const subscription = await stripe.subscriptions.create({
     customer: customer.id,
-    items: [{ plan: "plan_GaI0xFat59snvb" }], // TODO: this should be provided by the client
+    items: [{ plan }],
     expand: ["latest_invoice.payment_intent"],
   })
   callback(null, {
