@@ -28,7 +28,7 @@ exports.handler = async function(event, context, callback) {
     })
     return
   }
-
+  let cusID
   if (!data.subscription_id) {
     // This creates a new Customer and attaches the PaymentMethod in one API call.
     const cus = await stripe.customers.create({
@@ -38,6 +38,7 @@ exports.handler = async function(event, context, callback) {
         default_payment_method: data.payment_method,
       },
     })
+    cusID = cus.id
     try {
       const subscription = await stripe.subscriptions.create({
         customer: cusID,
@@ -51,6 +52,7 @@ exports.handler = async function(event, context, callback) {
     const subscription = await stripe.subscriptions.retrieve(
       data.subscription_id
     )
+    cusID = subscription.customer
     stripe.subscriptions.update(data.subscription_id, {
       cancel_at_period_end: false,
       items: [
