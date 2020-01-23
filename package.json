@@ -28,6 +28,7 @@
     "stripe": "^8.4.0"
   },
   "devDependencies": {
+    "concurrently": "^5.0.2",
     "netlify-lambda": "^1.6.3",
     "prettier": "^1.19.1",
     "tailwindcss": "^1.1.4"
@@ -38,12 +39,12 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build && netlify-lambda build lambda-src",
-    "develop": "gatsby develop",
+    "develop": "concurrently \"gatsby develop\" \"yarn run lambda-serve\"",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "lambda-serve": "netlify-lambda serve lambda-src"
   },
   "repository": {
     "type": "git",

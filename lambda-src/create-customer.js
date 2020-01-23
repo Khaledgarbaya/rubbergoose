@@ -21,32 +21,52 @@ exports.handler = async function(event, context, callback) {
   //-- Make sure we have all required data. Otherwise, escape.
   if (!data.email || !data.payment_method) {
     console.error("Required information is missing.")
-
     callback(null, {
       statusCode,
       headers,
       body: JSON.stringify({ status: "missing-information" }),
     })
-
     return
   }
 
-  // This creates a new Customer and attaches the PaymentMethod in one API call.
-  const customer = await stripe.customers.create({
-    payment_method: data.payment_method,
-    email: data.email,
-    invoice_settings: {
-      default_payment_method: data.payment_method,
-    },
-  })
-  const subscription = await stripe.subscriptions.create({
-    customer: customer.id,
-    items: [{ plan: data.plan }],
-    expand: ["latest_invoice.payment_intent"],
-  })
+  if (!data.subscription_id) {
+    // This creates a new Customer and attaches the PaymentMethod in one API call.
+    const cus = await stripe.customers.create({
+      payment_method: data.payment_method,
+      email: data.email,
+      invoice_settings: {
+        default_payment_method: data.payment_method,
+      },
+    })
+    try {
+      const subscription = await stripe.subscriptions.create({
+        customer: cusID,
+        items: [{ plan: data.plan }],
+        expand: ["latest_invoice.payment_intent"],
+      })
+    } catch (e) {
+      console.error(e)
+    }
+  } else {
+    const subscription = await stripe.subscriptions.retrieve(
+      data.subscription_id
+    )
+    stripe.subscriptions.update(data.subscription_id, {
+      cancel_at_period_end: false,
+      items: [
+        {
+          id: subscription.items.data[0].id,
+          plan: data.plan,
+        },
+      ],
+    })
+  }
+
   callback(null, {
     statusCode,
     headers,
-    body: JSON.stringify({ customer }),
+    body: JSON.stringify({
+      customer: { id: cusID, subscription_id: subscription.id },
+    }),
   })
 }

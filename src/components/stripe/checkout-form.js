@@ -3,7 +3,7 @@ import React from "react"
 import { injectStripe } from "react-stripe-elements"
 import CardSection from "./card-section"
 import axios from "axios"
-import { getCurrentUser } from "../../services/auth"
+import { getCurrentUser, updateUserInfo } from "../../services/auth"
 class CheckoutForm extends React.Component {
   constructor() {
     super()
@@ -26,12 +26,21 @@ class CheckoutForm extends React.Component {
       })
       .then(result => {
         axios
-          .post("https://rubbergoose.dev/.netlify/functions/create-customer", {
+          .post(`${process.env.LAMBDA_ENDPOINT}/create-customer`, {
             email: getCurrentUser().email,
+            subscription_id: getCurrentUser().user_metadata.subscription_id,
             payment_method: result.paymentMethod.id,
             plan: this.state.plan,
           })
-          .then(customer => console.log(customer))
+          .then(async ({ data }) => {
+            // Attach Customer id to authenticated authenticated user
+            const { customer } = data
+            const currentUser = getCurrentUser().user_metadata
+            currentUser.customer_id = customer.id
+            currentUser.subscription_id = customer.subscription_id
+            await updateUserInfo(currentUser)
+            console.log(getCurrentUser().user_metadata)
+          })
       })
   }
 
@@ -49,7 +58,7 @@ class CheckoutForm extends React.Component {
               <label key={plan.id} className="p-4">
                 {plan.name}{" "}
                 <input
-                  onSelect={this.handlePlanSelection}
+                  onChange={this.handlePlanSelection}
                   defaultChecked={this.state.plan === plan.id}
                   name="plan"
                   type="radio"
