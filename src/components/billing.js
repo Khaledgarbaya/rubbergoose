@@ -9,7 +9,7 @@ const Billing = () => {
     <div className="container mx-auto max-w-md">
       <DashboardNav />
       <div className="w-full max-w-lg shadow rounded-lg p-8 bg-white">
-        <StripeProvider apiKey="pk_test_fyVsoMAGv1xQpbXECEsQO4EP008J47tyuw">
+        <StripeProvider apiKey={process.env.STRIPE_PK}>
           <SubscriptionCheckout />
         </StripeProvider>
       </div>

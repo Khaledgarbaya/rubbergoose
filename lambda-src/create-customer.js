@@ -3,9 +3,8 @@ const headers = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "Content-Type",
 }
-// Set your secret key: remember to change this to your live secret key in production
-// See your keys here: https://dashboard.stripe.com/account/apikeys
-const stripe = require("stripe")("sk_test_XUeSJEOdMyDuVnLU8ZItdUJn00VJVU9Iy1")
+
+const stripe = require("stripe")(process.env.STRIPE_SK)
 
 exports.handler = async function(event, context, callback) {
   //-- We only care to do anything if this is our POST request.

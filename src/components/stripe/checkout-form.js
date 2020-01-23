@@ -7,7 +7,6 @@ import { getCurrentUser } from "../../services/auth"
 class CheckoutForm extends React.Component {
   constructor() {
     super()
-    console.log(getCurrentUser())
     this.state = { plan: "plan_Gb26BxaCDanonu" }
   }
   handlePlanSelection = ev => {
@@ -25,7 +24,7 @@ class CheckoutForm extends React.Component {
           email: getCurrentUser().email,
         },
       })
-      .then(function(result) {
+      .then(result => {
         axios
           .post("https://rubbergoose.dev/.netlify/functions/create-customer", {
             email: getCurrentUser().email,
@@ -37,7 +36,6 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <CardSection />
