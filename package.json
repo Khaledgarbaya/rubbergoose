@@ -8,6 +8,7 @@
     "axios": "^0.19.1",
     "gatsby": "^2.18.12",
     "gatsby-image": "^2.2.34",
+    "gatsby-plugin-env-variables": "^1.0.1",
     "gatsby-plugin-manifest": "^2.2.31",
     "gatsby-plugin-offline": "^3.0.27",
     "gatsby-plugin-postcss": "^2.1.19",
