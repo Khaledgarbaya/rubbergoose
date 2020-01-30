@@ -6,7 +6,6 @@ const headers = {
 const stripe = require("stripe")(process.env.STRIPE_SK)
 
 exports.handler = async function(event, context, callback) {
-  console.log('test')
   if (event.httpMethod !== "POST" || !event.body) {
     callback(null, {
       statusCode,
@@ -25,7 +24,8 @@ exports.handler = async function(event, context, callback) {
     return
   }
   const subscription = await stripe.subscriptions.retrieve(data.subscription_id)
-  stripe.subscriptions.update(data.subscription_id, {
+  console.log(subscription.id)
+  stripe.subscriptions.update(subscription.id, {
     cancel_at_period_end: false,
     items: [
       {
