@@ -15,9 +15,9 @@ exports.handler = async function(event, context, callback) {
     return
   }
   const data = JSON.parse(event.body)
-  if(!data.subscription_id || !data.plan) {
+  if (!data.subscription_id || !data.plan) {
     callback(null, {
-      400,
+      statusCode: 400,
       headers,
       body: JSON.stringify({ status: "Invalid-request" }),
     })
