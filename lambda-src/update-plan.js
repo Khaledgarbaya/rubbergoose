@@ -6,8 +6,7 @@ const headers = {
 const stripe = require("stripe")(process.env.STRIPE_SK)
 
 exports.handler = async function(event, context, callback) {
-  //-- Parse the body contents into an object.
-    //-- We only care to do anything if this is our POST request.
+  console.log('test')
   if (event.httpMethod !== "POST" || !event.body) {
     callback(null, {
       statusCode,

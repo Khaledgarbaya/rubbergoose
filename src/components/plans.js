@@ -37,7 +37,7 @@ const Plans = () => {
     <div className="container mx-auto max-w-md">
       <DashboardNav />
       <div className="w-full max-w-lg shadow rounded-lg p-8 bg-white">
-        <form onSubmit={handleSubmit}>
+        <form>
           <h2>Plans Details</h2>
           <p className="text-sm text-gray-600">
             You can update your plan at any time
@@ -64,7 +64,7 @@ const Plans = () => {
           </div>
           <button
             disabled={initialPlan === currentPlan}
-            type="submit"
+            onClick={handleSubmit}
             className="btn mt-4 block"
           >
             Update Plan
