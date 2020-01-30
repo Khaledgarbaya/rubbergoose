@@ -14,9 +14,16 @@ const DashboardNav = () => (
       <Link
         activeClassName="border-b border-purple-700"
         className="p-1 ml-2"
+        to="/user/plans"
+      >
+        Plans
+      </Link>
+      <Link
+        activeClassName="border-b border-purple-700"
+        className="p-1 ml-2"
         to="/user/billing"
       >
-        Billing
+        Billing details
       </Link>
     </div>
     <div>

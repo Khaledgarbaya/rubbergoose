@@ -5,13 +5,6 @@ import CardSection from "./card-section"
 import axios from "axios"
 import { getCurrentUser, updateUserInfo } from "../../services/auth"
 class CheckoutForm extends React.Component {
-  constructor() {
-    super()
-    this.state = { plan: "plan_Gb26BxaCDanonu" }
-  }
-  handlePlanSelection = ev => {
-    this.setState({ plan: ev.target.value })
-  }
   handleSubmit = ev => {
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault()
@@ -48,27 +41,7 @@ class CheckoutForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <CardSection />
-        <div className="mt-6">
-          {[
-            { id: "plan_Gb26BxaCDanonu", name: "Basic" },
-            { id: "plan_Gb26Y1FdKtO1YA", name: "Pro" },
-            { id: "plan_Gb27iIYq4Xq6VN", name: "Pro Plus" },
-          ].map(plan => {
-            return (
-              <label key={plan.id} className="p-4">
-                {plan.name}{" "}
-                <input
-                  onChange={this.handlePlanSelection}
-                  defaultChecked={this.state.plan === plan.id}
-                  name="plan"
-                  type="radio"
-                  value={plan.id}
-                />
-              </label>
-            )
-          })}
-        </div>
-        <button className="btn mt-4 block">Subscribe</button>
+        <button className="btn mt-4 block">Update Payment Method</button>
       </form>
     )
   }
