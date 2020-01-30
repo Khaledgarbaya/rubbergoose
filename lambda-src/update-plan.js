@@ -38,7 +38,7 @@ exports.handler = async function(event, context, callback) {
     statusCode,
     headers,
     body: JSON.stringify({
-      customer: { subscription_id: subscription.id, current_plan: data.plan },
+      subscription: { id: subscription.id, plan: data.plan },
     }),
   })
 }

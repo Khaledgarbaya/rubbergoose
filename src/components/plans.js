@@ -22,10 +22,10 @@ const Plans = () => {
         plan: currentPlan,
       })
       .then(async ({ data }) => {
-        const { subscription_id, current_plan } = data
+        const { subscription } = data
         const currentUser = getCurrentUser().user_metadata
-        currentUser.subscription_id = subscription_id
-        currentUser.current_plan = current_plan
+        currentUser.subscription_id = subscription.id
+        currentUser.current_plan = subscription.plan
         await updateUserInfo(currentUser)
         console.log(getCurrentUser().user_metadata)
       })
