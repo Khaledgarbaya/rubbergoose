@@ -7,6 +7,14 @@ const stripe = require("stripe")(process.env.STRIPE_SK)
 
 exports.handler = async function(event, context, callback) {
   //-- Parse the body contents into an object.
+    //-- We only care to do anything if this is our POST request.
+  if (event.httpMethod !== "POST" || !event.body) {
+    callback(null, {
+      statusCode,
+      headers,
+      body: "",
+    })
+  }
   const data = JSON.parse(event.body)
   if(!data.subscription_id || !data.plan) {
     callback(null, {

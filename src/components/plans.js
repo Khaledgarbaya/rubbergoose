@@ -22,13 +22,15 @@ const Plans = () => {
         plan: currentPlan,
       })
       .then(async ({ data }) => {
-        // Attach Customer id to authenticated authenticated user
         const { subscription_id, current_plan } = data
         const currentUser = getCurrentUser().user_metadata
         currentUser.subscription_id = subscription_id
         currentUser.current_plan = current_plan
         await updateUserInfo(currentUser)
         console.log(getCurrentUser().user_metadata)
+      })
+      .catch(e => {
+        console.error(e)
       })
   }
   return (
@@ -60,7 +62,11 @@ const Plans = () => {
               )
             })}
           </div>
-          <button type="submit" className="btn mt-4 block">
+          <button
+            disabled={initialPlan === currentPlan}
+            type="submit"
+            className="btn mt-4 block"
+          >
             Update Plan
           </button>
         </form>
