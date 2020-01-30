@@ -13,6 +13,7 @@ exports.handler = async function(event, context, callback) {
       headers,
       body: "",
     })
+    return
   }
   const data = JSON.parse(event.body)
   if(!data.subscription_id || !data.plan) {
