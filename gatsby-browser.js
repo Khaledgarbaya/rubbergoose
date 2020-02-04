@@ -12,7 +12,7 @@ import { InMemoryCache } from "apollo-cache-inmemory"
 const cache = new InMemoryCache()
 
 const httpLink = new HttpLink({
-  uri: "http://rubbergoose.herokuapp.com/v1/graphql",
+  uri: "https://rubbergoose.herokuapp.com/v1/graphql",
   headers: {
     "x-hasura-admin-secret": `${process.env.HASURA_SECRET}`,
   },
@@ -20,7 +20,7 @@ const httpLink = new HttpLink({
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
-  uri: "ws://rubbergoose.herokuapp.com/v1/graphql", // use wss for a secure endpoint
+  uri: "wss://rubbergoose.herokuapp.com/v1/graphql", // use wss for a secure endpoint
 
   options: {
     reconnect: true,
