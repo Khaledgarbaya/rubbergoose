@@ -1,8 +1,8 @@
-const fetch = require("node-fetch")
+const axios = require("axios")
 
 exports.handler = async function(event, context) {
   const { user } = JSON.parse(event.body)
-  const responseBodyString = JSON.stringify({
+  const responseBody = JSON.stringify({
     query: `
     mutation insertUser($id: String, $email:String, $name:String){
       insert_users(objects: {id: $id, email: $email, name: $name}) {
@@ -16,15 +16,18 @@ exports.handler = async function(event, context) {
       name: user.user_metadata.full_name,
     },
   })
-  const result = await fetch("https://rubbergoose.herokuapp.com/v1/graphql", {
-    method: "POST",
-    body: responseBodyString,
-    headers: {
-      "Content-Type": "application/json",
-      "x-hasura-admin-secret": process.env.HASURA_SECRET,
-    },
-  })
-  const { errors, data } = await result.json()
+  const result = await axios.post(
+    "https://rubbergoose.herokuapp.com/v1/graphql",
+    responseBody,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "x-hasura-admin-secret": process.env.HASURA_SECRET,
+      },
+    }
+  )
+
+  const { errors, data } = result.data
   console.log(data)
   if (errors) {
     console.log(errors)
