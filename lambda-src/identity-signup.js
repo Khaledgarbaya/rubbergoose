@@ -1,4 +1,5 @@
 const fetch = require("node-fetch")
+
 exports.handler = async function(event, context) {
   const { user } = JSON.parse(event.body)
   const responseBodyString = JSON.stringify({
@@ -15,7 +16,7 @@ exports.handler = async function(event, context) {
       name: user.user_metadata.full_name,
     },
   })
-  const result = await fetch("http://rubbergoose.herokuapp.com/v1/graphql", {
+  const result = await fetch("https://rubbergoose.herokuapp.com/v1/graphql", {
     method: "POST",
     body: responseBodyString,
     headers: {
@@ -24,6 +25,7 @@ exports.handler = async function(event, context) {
     },
   })
   const { errors, data } = await result.json()
+  console.log(data)
   if (errors) {
     console.log(errors)
     return {
