@@ -1,8 +1,6 @@
 import React from "react"
 import DashboardNav from "./dashbaord-nav"
-import { Elements, StripeProvider } from "react-stripe-elements"
-import CheckoutForm from "../components/stripe/checkout-form"
-import { graphql, useStaticQuery } from "gatsby"
+import { StripeProvider } from "react-stripe-elements"
 import SubscriptionCheckout from "../components/stripe/subscription-checkout"
 const Billing = () => {
   return (

@@ -7,6 +7,13 @@ const DashboardNav = () => (
       <Link
         activeClassName="border-b border-purple-700"
         className="p-1"
+        to="/user/home"
+      >
+        Home
+      </Link>
+      <Link
+        activeClassName="border-b border-purple-700"
+        className="p-1"
         to="/user/dashboard"
       >
         Settings

@@ -9,6 +9,7 @@ const setUser = user =>
 
 export const handleLogin = navigate => {
   netlifyAuth.authenticate(() => {
+    debugger
     setUser(netlifyIdentity.currentUser())
     navigate("/user/dashboard")
   })
@@ -24,6 +25,10 @@ const netlifyAuth = {
       this.user = user
       callback(user)
     })
+    netlifyIdentity.on("init", user => {
+      this.user = user
+      callback(user)
+    })
   },
   signout(callback) {
     this.isAuthenticated = false
@@ -36,7 +41,7 @@ const netlifyAuth = {
 }
 
 export const isLoggedIn = () => {
-  return netlifyAuth.isAuthenticated
+  return netlifyIdentity.currentUser() || netlifyAuth.isAuthenticated
 }
 export const logout = callback => {
   setUser({})
