@@ -1,6 +1,6 @@
 const fetch = require("node-fetch")
 
-exports.handler = async function(event, context, callback) {
+export async function handler(event, context) {
   const { user } = JSON.parse(event.body)
 
   const responseBodyString = JSON.stringify({
@@ -30,14 +30,14 @@ exports.handler = async function(event, context, callback) {
 
   if (errors) {
     console.log(errors)
-    return callback({
+    return {
       statusCode: 500,
       body: "Something is wrong",
-    })
+    }
   } else {
-    return callback({
+    return {
       statusCode: 200,
       body: JSON.stringify(data),
-    })
+    }
   }
 }
