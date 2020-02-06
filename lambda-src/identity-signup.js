@@ -27,17 +27,18 @@ exports.handler = async function(event, context) {
         },
       }
     )
+
+    const { data } = result.data
+    console.log(data)
+    return {
+      statusCode: 200,
+      body: JSON.stringify(responseBody),
+    }
   } catch (e) {
     console.log(e)
     return {
       statusCode: 500,
       body: "Something is wrong",
     }
-  }
-  const { data } = result.data
-  console.log(data)
-  return {
-    statusCode: 200,
-    body: JSON.stringify(responseBody),
   }
 }
