@@ -16,29 +16,28 @@ exports.handler = async function(event, context) {
       name: user.user_metadata.full_name,
     },
   }
-  const result = await axios.post(
-    "https://rubbergoose.herokuapp.com/v1/graphql",
-    responseBody,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "x-hasura-admin-secret": process.env.HASURA_SECRET,
-      },
-    }
-  )
-
-  const { errors, data } = result.data
-  console.log(data)
-  if (errors) {
-    console.log(errors)
+  try {
+    const result = await axios.post(
+      "https://rubbergoose.herokuapp.com/v1/graphql",
+      responseBody,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-hasura-admin-secret": process.env.HASURA_SECRET,
+        },
+      }
+    )
+  } catch (e) {
+    console.log(e)
     return {
       statusCode: 500,
       body: "Something is wrong",
     }
-  } else {
-    return {
-      statusCode: 200,
-      body: JSON.stringify(responseBody),
-    }
+  }
+  const { data } = result.data
+  console.log(data)
+  return {
+    statusCode: 200,
+    body: JSON.stringify(responseBody),
   }
 }
