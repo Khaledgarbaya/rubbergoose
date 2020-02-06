@@ -2,7 +2,7 @@ const axios = require("axios")
 
 exports.handler = async function(event, context) {
   const { user } = JSON.parse(event.body)
-  const responseBody = JSON.stringify({
+  const responseBody = {
     query: `
     mutation insertUser($id: String, $email:String, $name:String){
       insert_users(objects: {id: $id, email: $email, name: $name}) {
@@ -15,7 +15,7 @@ exports.handler = async function(event, context) {
       email: user.email,
       name: user.user_metadata.full_name,
     },
-  })
+  }
   const result = await axios.post(
     "https://rubbergoose.herokuapp.com/v1/graphql",
     responseBody,
