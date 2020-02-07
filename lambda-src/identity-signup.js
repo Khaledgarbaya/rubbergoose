@@ -1,14 +1,15 @@
-const fetch = require("node-fetch")
+//const fetch = require("node-fetch")
+const axios = require("axios")
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "Content-Type",
 }
 
-export async function handler(event, context) {
+exports.handler = async function(event, context) {
   const { user } = JSON.parse(event.body)
   console.log(user)
-  const responseBodyString = JSON.stringify({
+  const responseBody = {
     query: `
   mutation insertUser($id: String, $email:String, $name:String){
     insert_users(objects: {id: $id, email: $email, name: $name}) {
@@ -21,38 +22,29 @@ export async function handler(event, context) {
       email: user.email,
       name: user.user_metadata.full_name,
     },
-  })
+  }
 
-  const result = await fetch("https://rubbergoose.herokuapp.com/v1/graphql", {
-    method: "POST",
-    body: responseBodyString,
-    headers: {
-      "Content-Type": "application/json",
-      "x-hasura-admin-secret": process.env.HASURA_SECRET,
-    },
-  })
-  console.log(result)
-  const { errors, data } = await result.json()
-  console.log("data====================")
-  console.log(data)
-  console.log("data====================")
-  console.log("errros====================")
-  console.log(errors)
-  console.log("errros====================")
+  try {
+    const result = await axios.post(
+      "https://rubbergoose.herokuapp.com/v1/graphql",
+      responseBody,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-hasura-admin-secret": process.env.HASURA_SECRET,
+        },
+      }
+    )
+  } catch (e) {
+    console.log(e)
+
+    return {
+      statusCode: 500,
+      body: "Something is wrong",
+    }
+  }
   return {
     statusCode: 200,
-    headers,
+    body: "works",
   }
-  //if (errors) {
-  //console.log(errors)
-  //return {
-  //statusCode: 500,
-  //body: "Something is wrong",
-  //}
-  //} else {
-  //return {
-  //statusCode: 200,
-  //body: JSON.stringify(data),
-  //}
-  //}
 }
