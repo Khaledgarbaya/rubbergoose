@@ -31,6 +31,7 @@ export async function handler(event, context) {
       "x-hasura-admin-secret": process.env.HASURA_SECRET,
     },
   })
+  console.log(result)
   const { errors, data } = await result.json()
   console.log("data====================")
   console.log(data)
