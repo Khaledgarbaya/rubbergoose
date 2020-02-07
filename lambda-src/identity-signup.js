@@ -1,12 +1,14 @@
-//const fetch = require("node-fetch")
 const axios = require("axios")
-
-const headers = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-}
+const { HASURA_SECRET } = process.env
 
 exports.handler = async function(event, context) {
+  if (event.httpMethod !== "POST") {
+    return callback(null, {
+      statusCode: 410,
+      body: "Unsupported Request Method",
+    })
+  }
+
   const { user } = JSON.parse(event.body)
   console.log(user)
   const responseBody = {
@@ -31,7 +33,7 @@ exports.handler = async function(event, context) {
       {
         headers: {
           "Content-Type": "application/json",
-          "x-hasura-admin-secret": process.env.HASURA_SECRET,
+          "x-hasura-admin-secret": HASURA_SECRET,
         },
       }
     )
@@ -45,6 +47,6 @@ exports.handler = async function(event, context) {
   }
   return {
     statusCode: 200,
-    body: "works",
+    body: "{}",
   }
 }
