@@ -1,5 +1,10 @@
 const fetch = require("node-fetch")
 
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+}
+
 export async function handler(event, context) {
   const { user } = JSON.parse(event.body)
   console.log(user)
@@ -35,6 +40,7 @@ export async function handler(event, context) {
   console.log("errros====================")
   return {
     statusCode: 200,
+    headers,
   }
   //if (errors) {
   //console.log(errors)
