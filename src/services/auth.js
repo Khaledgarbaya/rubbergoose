@@ -9,7 +9,6 @@ const setUser = user =>
 
 export const handleLogin = navigate => {
   netlifyAuth.authenticate(() => {
-    debugger
     setUser(netlifyIdentity.currentUser())
     navigate("/user/dashboard")
   })
