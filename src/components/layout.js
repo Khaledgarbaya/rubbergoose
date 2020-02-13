@@ -46,6 +46,13 @@ const Layout = ({ children }) => {
           </div>
           <div>
             <Link
+              activeClassName="border-b border-purple-700"
+              className="p-2 mr-4 text-sm hover:text-purple-700"
+              to="/blog"
+            >
+              Blog
+            </Link>
+            <Link
               to="/user/dashboard"
               className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
             >

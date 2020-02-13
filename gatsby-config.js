@@ -4,9 +4,9 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Rubber Goose`,
+    description: `Debug Your brain with Rubber Goose`,
+    author: `@khaled_garbaya`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -43,6 +43,13 @@ module.exports = {
       resolve: `gatsby-plugin-env-variables`,
       options: {
         whitelist: ["STRIPE_PK", "LAMBDA_ENDPOINT"],
+      },
+    },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE,
+        accessToken: process.env.CONTENTFUL_KEY,
       },
     },
   ],
