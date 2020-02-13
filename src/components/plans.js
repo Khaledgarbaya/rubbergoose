@@ -31,9 +31,9 @@ const Plans = () => {
       })
   }
   return (
-    <div className="container mx-auto max-w-md">
+    <div className="container mx-auto">
       <DashboardNav />
-      <div className="w-full max-w-lg shadow rounded-lg p-8 bg-white">
+      <div className="container mx-auto shadow rounded-lg p-8 bg-white">
         <form>
           <h2>Plans Details</h2>
           <p className="text-sm text-gray-600">

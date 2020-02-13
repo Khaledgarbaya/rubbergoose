@@ -8,7 +8,7 @@ const IndexPage = () => (
       <div className="p-16">
         <h1 className="text-4xl sm:text-6xl">Rubber Goose</h1>
         <h4 className="text-md sm:text-xl">
-          Debug Your brain wit Rubber Goose
+          Debug Your brain with Rubber Goose
         </h4>
         <form
           className="w-full max-w-sm mt-8"
@@ -512,7 +512,7 @@ const IndexPage = () => (
     </div>
     <div className="container mx-auto sm:flex justify-center items-center">
       <div className="p-16">
-        <h2 className="text-2xl sm:text-4xl">Wrok together</h2>
+        <h2 className="text-2xl sm:text-4xl">Work together</h2>
         <h4 className="text-md sm:text-xl">Work together celebrate together</h4>
       </div>
       <div className="p-16 mt-16">

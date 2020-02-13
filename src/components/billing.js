@@ -4,9 +4,9 @@ import { StripeProvider } from "react-stripe-elements"
 import SubscriptionCheckout from "../components/stripe/subscription-checkout"
 const Billing = () => {
   return (
-    <div className="container mx-auto max-w-md">
+    <div className="container mx-auto">
       <DashboardNav />
-      <div className="w-full max-w-lg shadow rounded-lg p-8 bg-white">
+      <div className="container mx-auto shadow rounded-lg p-8 bg-white">
         <StripeProvider apiKey={process.env.STRIPE_PK}>
           <SubscriptionCheckout />
         </StripeProvider>
