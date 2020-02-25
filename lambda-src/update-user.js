@@ -6,9 +6,9 @@ const headers = {
 
 exports.handler = async function(event, context, callback) {
   console.log(event.body)
-  callback(null, {
+  return {
     statusCode,
     headers,
     body: JSON.stringify({ message: "works" }),
-  })
+  }
 }
