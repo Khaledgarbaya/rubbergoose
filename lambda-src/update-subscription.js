@@ -4,7 +4,7 @@ const headers = {
   "Access-Control-Allow-Headers": "Content-Type",
 }
 
-exports.handler = async function(event, context, callback) {
+exports.handler = async function(event, context) {
   console.log(event.body)
   return {
     statusCode,
