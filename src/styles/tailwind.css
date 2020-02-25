@@ -15,3 +15,6 @@ body {
 .btn:hover {
   @apply bg-purple-700 border-purple-700;
 }
+ p{
+   @apply text-gray-800 text-sm mb-4;
+ }

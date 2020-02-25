@@ -6,7 +6,7 @@ import { createHttpLink } from "apollo-link-http"
 import { ApolloLink } from "apollo-link"
 import { InMemoryCache } from "apollo-cache-inmemory"
 import { getCurrentUser } from "./src/services/auth"
-
+import { TwilioVideoProvider } from "./src/hooks/use-twilio-video"
 const cache = new InMemoryCache()
 
 const httpLink = createHttpLink({
@@ -34,5 +34,9 @@ window.netlifyIdentity = netlifyIdentity
 netlifyIdentity.init()
 
 export const wrapRootElement = ({ element }) => {
-  return <ApolloProvider client={client}>{element}</ApolloProvider>
+  return (
+    <TwilioVideoProvider>
+      <ApolloProvider client={client}>{element}</ApolloProvider>
+    </TwilioVideoProvider>
+  )
 }
