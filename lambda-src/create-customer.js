@@ -6,10 +6,10 @@ const headers = {
 
 const stripe = require("stripe")(process.env.STRIPE_SK)
 
-exports.handler = async (event, context) = > {
+exports.handler = async (event, context) => {
   //-- We only care to do anything if this is our POST request.
   if (event.httpMethod !== "POST" || !event.body) {
-    return{
+    return {
       statusCode,
       headers,
       body: "",
@@ -62,7 +62,7 @@ exports.handler = async (event, context) = > {
     })
   }
 
-  return{
+  return {
     statusCode,
     headers,
     body: JSON.stringify({

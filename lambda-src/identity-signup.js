@@ -2,7 +2,7 @@ const axios = require("axios")
 const { HASURA_SECRET } = process.env
 const stripe = require("stripe")(process.env.STRIPE_SK)
 
-exports.handler = async function(event, context) {
+exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return callback(null, {
       statusCode: 410,
@@ -12,6 +12,7 @@ exports.handler = async function(event, context) {
 
   const { user } = JSON.parse(event.body)
   const stripeCutomer = await stripe.customers.create({
+    name: user.user_metadata.full_name,
     description: user.user_metadata.full_name,
   })
   const responseBody = {
