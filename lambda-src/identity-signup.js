@@ -13,6 +13,7 @@ exports.handler = async (event, context) => {
   const { user } = JSON.parse(event.body)
   const stripeCutomer = await stripe.customers.create({
     name: user.user_metadata.full_name,
+    email: user.email,
     description: user.user_metadata.full_name,
   })
   const responseBody = {
