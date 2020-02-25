@@ -17,7 +17,7 @@ exports.handler = async function(event, context) {
   const responseBody = {
     query: `
   mutation insertUser($id: String, $email:String, $name:String, $customer_id: String){
-    insert_users(objects: {id: $id, email: $email, name: $name, customer_id:$customer_id}) {
+    insert_users(objects: {id: $id, email: $email, name: $name, customer_id: $customer_id}) {
       affected_rows
     }
   }
@@ -26,7 +26,7 @@ exports.handler = async function(event, context) {
       id: user.id,
       email: user.email,
       name: user.user_metadata.full_name,
-      customer_id: stripeCutomer.customer_id,
+      customer_id: stripeCutomer.id,
     },
   }
 
