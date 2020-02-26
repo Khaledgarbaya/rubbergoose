@@ -68,6 +68,9 @@ exports.handler = async (event, context) => {
     await stripe.paymentMethods.attach(payment_method, {
       customer: customer_id,
     })
+    await stripe.customers.update(customer_id, {
+      invoice_settings: { default_payment_method: payment_method },
+    })
     subscription = await stripe.subscriptions.create({
       customer: customer_id,
       items: [{ plan }],
