@@ -29,7 +29,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ status: "missing-information" }),
     }
   }
-  let { user_id, plan = "plan_Gb26BxaCDanonu" } = data
+  let { user_id, plan = "plan_Gb26BxaCDanonu", payment_method } = data
   let subscription = null
   // Get the stripe customer id from out database
   const responseBody = {
@@ -64,6 +64,10 @@ exports.handler = async (event, context) => {
   const { customer_id } = result.data.data.users[0]
   // This creates a new Customer and attaches the PaymentMethod in one API call.
   try {
+    // attach payment method
+    await stripe.paymentMethods.attach(payment_method, {
+      customer: customer_id,
+    })
     subscription = await stripe.subscriptions.create({
       customer: customer_id,
       items: [{ plan }],
