@@ -4,7 +4,8 @@ const headers = {
   "Access-Control-Allow-Headers": "Content-Type",
 }
 const { HASURA_SECRET } = process.env
-
+const axios = require("axios")
+const stripe = require("stripe")(process.env.STRIPE_SK)
 exports.handler = async function(event, context) {
   // Parse and extract webhook data
   const subscriptionEvent = JSON.parse(event.body)

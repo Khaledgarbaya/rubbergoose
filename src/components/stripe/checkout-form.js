@@ -22,7 +22,6 @@ class CheckoutForm extends React.Component {
           .post(`${process.env.LAMBDA_ENDPOINT}/create-customer`, {
             user_id: getCurrentUser().id,
             payment_method: result.paymentMethod.id,
-            plan: this.state.plan,
           })
           .then(async ({ data }) => {
             // Attach Customer id to authenticated authenticated user

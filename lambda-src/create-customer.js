@@ -4,6 +4,8 @@ const headers = {
   "Access-Control-Allow-Headers": "Content-Type",
 }
 
+const axios = require("axios")
+const { HASURA_SECRET } = process.env
 const stripe = require("stripe")(process.env.STRIPE_SK)
 
 exports.handler = async (event, context) => {
