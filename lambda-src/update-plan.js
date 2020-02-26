@@ -5,26 +5,23 @@ const headers = {
 }
 const stripe = require("stripe")(process.env.STRIPE_SK)
 
-exports.handler = async function(event, context, callback) {
+exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST" || !event.body) {
-    callback(null, {
+    return {
       statusCode,
       headers,
       body: "",
-    })
-    return
+    }
   }
   const data = JSON.parse(event.body)
   if (!data.subscription_id || !data.plan) {
-    callback(null, {
+    return {
       statusCode: 400,
       headers,
       body: JSON.stringify({ status: "Invalid-request" }),
-    })
-    return
+    }
   }
   const subscription = await stripe.subscriptions.retrieve(data.subscription_id)
-  console.log(subscription.id)
   stripe.subscriptions.update(subscription.id, {
     cancel_at_period_end: false,
     items: [
@@ -34,11 +31,11 @@ exports.handler = async function(event, context, callback) {
       },
     ],
   })
-  callback(null, {
+  return {
     statusCode,
     headers,
     body: JSON.stringify({
       subscription: { id: subscription.id, plan: data.plan },
     }),
-  })
+  }
 }
